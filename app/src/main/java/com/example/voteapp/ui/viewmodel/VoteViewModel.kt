@@ -20,11 +20,22 @@ class VoteViewModel : ViewModel() {
     private val voteApi: VoteApi = VoteApi()//obj build init block work
 
     //setter..........
-    fun loadResult() {
+    fun loadKing() {
         val apiCall = voteApi.getKing()
 
-      apiCall.enqueue(Callback<List<VotingItem>>{
+      apiCall.enqueue(object :Callback<Voting>{
+          override fun onFailure(call: Call<Voting>, t: Throwable) {
 
+          }
+
+          override fun onResponse(call: Call<Voting>, response: Response<Voting>) {
+              val a = response.body()
+              Log.d("response>>>", a.toString())
+              response.isSuccessful.let {
+                  val resultList: List<VotingItem> = response.body() ?: emptyList()
+                  results.value = resultList
+              }
+          }
       })
     }
 }
