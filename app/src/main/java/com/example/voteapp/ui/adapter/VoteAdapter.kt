@@ -27,6 +27,7 @@ class VoteAdapter(var voteList: List<VotingItem> = ArrayList()) :
             itemView.setOnClickListener(this)
         }
         fun bindVote(vote: VotingItem) {
+            this.vote=vote
             itemView.txtName.text = vote.name
             Picasso.get()
                 .load(vote.img_url)

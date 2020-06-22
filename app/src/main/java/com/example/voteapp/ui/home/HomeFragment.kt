@@ -1,6 +1,7 @@
 package com.example.voteapp.ui.home
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +21,7 @@ import com.example.voteapp.ui.model.VotingItem
 import com.example.voteapp.ui.viewmodel.VoteViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : Fragment(),VoteAdapter.ClickListener {
+class HomeFragment : Fragment(), VoteAdapter.ClickListener {
 
     private lateinit var voteViewModel: VoteViewModel
     private lateinit var foodAdapter: VoteAdapter
@@ -39,6 +41,7 @@ class HomeFragment : Fragment(),VoteAdapter.ClickListener {
         super.onViewCreated(view, savedInstanceState)
         viewManager = LinearLayoutManager(context)
         foodAdapter= VoteAdapter()
+        foodAdapter.setClickListener(this)
         recKing.apply {
             adapter = foodAdapter
             layoutManager = viewManager
@@ -59,5 +62,12 @@ class HomeFragment : Fragment(),VoteAdapter.ClickListener {
 
     override fun onClick(vote: VotingItem) {
         Toast.makeText(context,"${vote.name}", Toast.LENGTH_LONG).show()
+
+            var voteId=vote.id
+            var voteName=vote.name
+            var voteImg= vote.img_url
+            var action= HomeFragmentDirections.actionNavigationHomeToVoteFragment(voteId,voteName,voteImg)
+            findNavController().navigate(action)
+
     }
 }
