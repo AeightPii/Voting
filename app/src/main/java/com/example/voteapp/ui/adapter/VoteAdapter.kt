@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.voteapp.R
 
 import com.example.voteapp.ui.model.VotingItem
 
@@ -26,11 +27,11 @@ class VoteAdapter(var voteList: List<VotingItem> = ArrayList()) :
             itemView.setOnClickListener(this)
         }
         fun bindVote(vote: VotingItem) {
-            itemView.food_name.text = vote.name
+            itemView.txtName.text = vote.name
             Picasso.get()
                 .load(vote.img_url)
                 .placeholder(R.drawable.ic_launcher_background)
-                .into(itemView.food_photo)
+                .into(itemView.image_Person)
 
         }
         override fun onClick(v: View?) {

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="10dp"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,17 +14,24 @@
         tools:context=".MainActivity">
 
         <ImageView
-            android:id="@+id/image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/image_Person"
+            android:layout_width="150pt"
+            android:layout_height="150pt"
+
+            android:src="@drawable/ic_launcher_background"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"/>
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
 
         <TextView
             android:id="@+id/txtName"
+            android:text="Kyaw Kyae"
+            android:layout_margin="15dp"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/image"
+            app:layout_constraintTop_toBottomOf="@id/image_Person"
             app:layout_constraintLeft_toLeftOf="parent"
             />
 

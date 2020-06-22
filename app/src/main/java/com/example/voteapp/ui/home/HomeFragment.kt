@@ -5,15 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.voteapp.R
 import com.example.voteapp.ui.adapter.VoteAdapter
+import com.example.voteapp.ui.model.VotingItem
 import com.example.voteapp.ui.viewmodel.VoteViewModel
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(),VoteAdapter.ClickListener {
 
@@ -33,9 +37,9 @@ class HomeFragment : Fragment(),VoteAdapter.ClickListener {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewManager = GridLayoutManager(context,2)
+        viewManager = LinearLayoutManager(context)
         foodAdapter= VoteAdapter()
-        recBeef.apply {
+        recKing.apply {
             adapter = foodAdapter
             layoutManager = viewManager
         }
@@ -51,5 +55,9 @@ class HomeFragment : Fragment(),VoteAdapter.ClickListener {
     override fun onResume() {
         super.onResume()
         voteViewModel.loadKing()
+    }
+
+    override fun onClick(vote: VotingItem) {
+        Toast.makeText(context,"${vote.name}", Toast.LENGTH_LONG).show()
     }
 }
