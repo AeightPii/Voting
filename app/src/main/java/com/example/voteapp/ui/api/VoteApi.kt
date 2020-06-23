@@ -22,4 +22,7 @@ class VoteApi {
     fun getKing():Call<Voting>{
         return voteApiInterface.getKing()
     }
+    fun getQueen():Call<Voting>{
+        return voteApiInterface.getQueen()
+    }
 }

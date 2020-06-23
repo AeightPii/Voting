@@ -18,4 +18,13 @@ interface VoteApiInterface {
         @Query("king_id") kingId: String?
     ): Call<VoteResponse>
 
+    @GET("queen")
+    fun getQueen(): Call<Voting>
+
+    @POST("queenvote")
+    fun voteQueen(
+        @Query("code") code:String,
+        @Query("queen_id") queenId: String?
+    ): Call<VoteResponse>
+
 }
