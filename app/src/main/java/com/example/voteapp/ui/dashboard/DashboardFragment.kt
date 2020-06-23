@@ -10,20 +10,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.voteapp.R
-import com.example.voteapp.ui.adapter.DashboardAdapter
 import com.example.voteapp.ui.adapter.VoteAdapter
 import com.example.voteapp.ui.model.VotingItem
 import com.example.voteapp.ui.viewmodel.DashboardViewModel
 import kotlinx.android.synthetic.main.fragment_dashboard.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
-class DashboardFragment : Fragment(), DashboardAdapter.DashClickListener {
+class DashboardFragment : Fragment(), VoteAdapter.ClickListener {
 
     private lateinit var dashboardViewModel: DashboardViewModel
-    private lateinit var dashboardAdapter: DashboardAdapter
+    private lateinit var dashboardAdapter: VoteAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,10 +35,10 @@ class DashboardFragment : Fragment(), DashboardAdapter.DashClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         recQueen.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
-        dashboardAdapter = DashboardAdapter()
+        dashboardAdapter = VoteAdapter()
         recQueen.adapter = dashboardAdapter
 
-        dashboardAdapter.setDashClickListener(this)
+        dashboardAdapter.setClickListener(this)
         observeViewModel()
     }
 

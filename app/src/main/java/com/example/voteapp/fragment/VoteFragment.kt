@@ -29,6 +29,7 @@ class VoteFragment : Fragment() {
         var root = inflater.inflate(R.layout.fragment_vote, container, false)
         return root
     }
+
     val BASE_URL = "https://ucsmonywaonlinevote.000webhostapp.com/api/"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,36 +41,56 @@ class VoteFragment : Fragment() {
         var retrofitService = retrofit.create(VoteApiInterface::class.java)
 
         var messageArgs = arguments?.let { VoteFragmentArgs.fromBundle(it) }
-        var kingId = messageArgs?.VoteId
+        var vId = messageArgs?.VoteId
         var name: String? = messageArgs?.voteName
-        var voteImg:String?=messageArgs?.voteImg
+        var voteImg: String? = messageArgs?.voteImg
 
         Log.d("image", voteImg.toString())
         Picasso.get()
             .load(voteImg)
             .into(img_vote)
-
         voteName.text = name
 
         btn_vote.setOnClickListener {
             val code = voteCode.text.toString()
-            val apiCall = retrofitService.voteKing(code,kingId)
-            apiCall.enqueue(object : Callback<VoteResponse> {
-                override fun onFailure(call: Call<VoteResponse>, t: Throwable) {
-                    TODO("Not yet implemented")
-                }
+            val apiCall = retrofitService.voteKing(code, vId)
+            val apiCallQ = retrofitService.voteQueen(code, vId)
+            if (vId == "K1" && vId == "K2" && vId == "K3" && vId == "K4" && vId == "K5" && vId == "K6" && vId == "K7" && vId == "K8" && vId == "K9" && vId == "K10"){
+                apiCall.enqueue(object : Callback<VoteResponse> {
+                    override fun onFailure(call: Call<VoteResponse>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
 
-                override fun onResponse(
-                    call: Call<VoteResponse>,
-                    response: Response<VoteResponse>
-                ) {
-                    Toast.makeText(
-                        context,
-                        response.body().toString(),
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-            })
+                    override fun onResponse(
+                        call: Call<VoteResponse>,
+                        response: Response<VoteResponse>
+                    ) {
+                        Toast.makeText(
+                            context,
+                            response.body().toString(),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                })
+            }else{
+                apiCallQ.enqueue(object :Callback<VoteResponse>{
+                    override fun onFailure(call: Call<VoteResponse>, t: Throwable) {
+                    }
+
+                    override fun onResponse(
+                        call: Call<VoteResponse>,
+                        response: Response<VoteResponse>
+                    ) {
+                        Toast.makeText(
+                            context,
+                            response.body().toString(),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+
+                })
+            }
+
 
         }
 
