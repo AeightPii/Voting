@@ -33,7 +33,6 @@ class VoteAdapter(var voteList: List<VotingItem> = ArrayList()) :
                 .load(vote.img_url)
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(itemView.image_Person)
-
         }
         override fun onClick(v: View?) {
 
