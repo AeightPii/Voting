@@ -16,16 +16,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.voteapp.R
+import com.example.voteapp.ui.adapter.DashboardAdapter
 import com.example.voteapp.ui.adapter.VoteAdapter
 import com.example.voteapp.ui.model.VotingItem
 import com.example.voteapp.ui.viewmodel.VoteViewModel
+import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(), VoteAdapter.ClickListener {
 
     private lateinit var voteViewModel: VoteViewModel
-    private lateinit var foodAdapter: VoteAdapter
-    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var voteAdapter: VoteAdapter
+
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -39,19 +41,18 @@ class HomeFragment : Fragment(), VoteAdapter.ClickListener {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewManager = LinearLayoutManager(context)
-        foodAdapter= VoteAdapter()
-        foodAdapter.setClickListener(this)
-        recKing.apply {
-            adapter = foodAdapter
-            layoutManager = viewManager
-        }
+
+        recKing.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+         voteAdapter= VoteAdapter()
+        recKing.adapter = voteAdapter
+
+        voteAdapter.setClickListener(this)
         observeViewModel()
     }
     private fun observeViewModel(){
         voteViewModel= ViewModelProvider(this).get(VoteViewModel::class.java)
         voteViewModel.getResult().observe(viewLifecycleOwner, Observer {
-            foodAdapter.updateList(it)
+            voteAdapter.updateList(it)
         }
         )
     }

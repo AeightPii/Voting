@@ -1,6 +1,7 @@
 package com.example.voteapp.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -42,6 +43,8 @@ class VoteFragment : Fragment() {
         var kingId = messageArgs?.VoteId
         var name: String? = messageArgs?.voteName
         var voteImg:String?=messageArgs?.voteImg
+
+        Log.d("image", voteImg.toString())
         Picasso.get()
             .load(voteImg)
             .into(img_vote)
