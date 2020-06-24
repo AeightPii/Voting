@@ -62,4 +62,5 @@ class VoteAdapter   (var voteList: List<VotingItem> = ArrayList()) :
         fun onClick(vote: VotingItem)//no implementation no body
     }
 
+
 }

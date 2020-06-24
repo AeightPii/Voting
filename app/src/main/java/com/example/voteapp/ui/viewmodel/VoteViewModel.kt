@@ -1,12 +1,14 @@
 package com.example.voteapp.ui.viewmodel
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.voteapp.ui.api.VoteApi
 import com.example.voteapp.ui.model.Voting
 import com.example.voteapp.ui.model.VotingItem
+import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

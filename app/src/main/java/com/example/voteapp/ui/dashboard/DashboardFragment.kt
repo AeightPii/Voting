@@ -33,7 +33,7 @@ class DashboardFragment : Fragment(), VoteAdapter.ClickListener {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        pb_vote_queen.visibility=View.VISIBLE
         recQueen.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
         dashboardAdapter = VoteAdapter()
         recQueen.adapter = dashboardAdapter
@@ -46,6 +46,7 @@ class DashboardFragment : Fragment(), VoteAdapter.ClickListener {
         dashboardViewModel= ViewModelProvider(this).get(DashboardViewModel::class.java)
         dashboardViewModel.getResult().observe(viewLifecycleOwner, Observer {
             dashboardAdapter.updateList(it)
+            pb_vote_queen.visibility=View.GONE
         }
         )
     }

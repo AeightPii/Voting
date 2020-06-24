@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import com.example.voteapp.R
 import com.example.voteapp.ui.api.VoteApiInterface
 import com.example.voteapp.ui.model.VoteResponse
@@ -32,6 +33,8 @@ class VoteFragment : Fragment() {
 
     val BASE_URL = "https://ucsmonywaonlinevote.000webhostapp.com/api/"
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var retrofit = Retrofit.Builder()
@@ -51,11 +54,12 @@ class VoteFragment : Fragment() {
             .into(img_vote)
         voteName.text = name
 
+
         btn_vote.setOnClickListener {
             val code = voteCode.text.toString()
             val apiCall = retrofitService.voteKing(code, vId)
             val apiCallQ = retrofitService.voteQueen(code, vId)
-            if (vId == "K1" && vId == "K2" && vId == "K3" && vId == "K4" && vId == "K5" && vId == "K6" && vId == "K7" && vId == "K8" && vId == "K9" && vId == "K10"){
+            if (vId == "K1" && vId == "K2" && vId == "K3" && vId == "K4" && vId == "K5" && vId == "K6" && vId == "K7" && vId == "K8" && vId == "K9" && vId == "K10") {
                 apiCall.enqueue(object : Callback<VoteResponse> {
                     override fun onFailure(call: Call<VoteResponse>, t: Throwable) {
                         TODO("Not yet implemented")
@@ -72,8 +76,8 @@ class VoteFragment : Fragment() {
                         ).show()
                     }
                 })
-            }else{
-                apiCallQ.enqueue(object :Callback<VoteResponse>{
+            } else {
+                apiCallQ.enqueue(object : Callback<VoteResponse> {
                     override fun onFailure(call: Call<VoteResponse>, t: Throwable) {
                     }
 
@@ -93,6 +97,7 @@ class VoteFragment : Fragment() {
 
 
         }
+
 
     }
 
